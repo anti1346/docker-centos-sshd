@@ -8,7 +8,7 @@ LABEL website="sangchul.kr"
 
 RUN sed -i -e "s/mirrorlist=/#mirrorlist=/g" /etc/yum.repos.d/CentOS-* \
   && sed -i -e "s/#baseurl=http:\/\/mirror.centos.org/baseurl=http:\/\/vault.centos.org/g" /etc/yum.repos.d/CentOS-* \
-  && yum install -y systemd sudo passwd \
+  && yum install -y systemd sudo passwd shadow-utils \
     openssh-server openssh-clients \
     net-tools vim \
   && yum clean all
@@ -24,18 +24,17 @@ RUN echo 'root:root' | chpasswd
 RUN echo 'export PS1="\[\e[33m\]\u\[\e[m\]\[\e[37m\]@\[\e[m\]\[\e[34m\]\h\[\e[m\]:\[\033[01;31m\]\W\[\e[m\]$ "' >> ~/.bashrc
 # RUN source ~/.bashrc
 
-RUN useradd -rm -d /home/centos -s /bin/bash -G sudo centos \
+RUN useradd -rm -d /home/centos -s /bin/bash -G wheel centos \
   && mkdir -m 700 /home/centos/.ssh \
   && echo 'centos:centos' | chpasswd \
-  && echo "centos\tALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
-
-# RUN service ssh start
+  && echo -e "centos\tALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
 
 WORKDIR /root
 
 EXPOSE 22
 
 CMD ["/bin/bash"]
+
 
 # systemctl restart sshd
 # systemctl status sshd
