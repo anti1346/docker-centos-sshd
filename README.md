@@ -21,33 +21,17 @@ docker run -it --rm anti1346/centos8-sshd:latest
 systemctl start sshd
 ```
 
-
-
-
-
-## docker vault test
+## docker privileged mode test
 ##### docker network
 ```
 docker network create vnetwork
 ```
 ##### docker run
 ```
-docker run -d --privileged --cap-add=SYS_ADMIN --name auth-server -h auth-server --net vnetwork anti1346/centos8-sshd:latest /sbin/init
+docker run -d --privileged --cap-add=SYS_ADMIN --net vnetwork --name centos8 -h centos8 anti1346/centos8-sshd:latest /sbin/init
 ```
 ```
-docker exec -it auth-server bash
-```
-```
-docker run -d --privileged --cap-add=SYS_ADMIN --name ssh-server -h ssh-server --net vnetwork anti1346/centos8-sshd:latest /sbin/init
-```
-```
-docker exec -it ssh-server bash
-```
-```
-docker run -d --privileged --cap-add=SYS_ADMIN --name ssh-client -h ssh-client --net vnetwork anti1346/centos8-sshd:latest /sbin/init
-```
-```
-docker exec -it ssh-client bash
+docker exec -it centos8 bash
 ```
 ##### ssh(sshd) start
 ```
