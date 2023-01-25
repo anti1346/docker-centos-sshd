@@ -32,19 +32,19 @@ docker network create vnetwork
 ```
 ##### docker run
 ```
-docker run -d --privileged --cap-add=SYS_ADMIN --name auth-server -h auth-server --net vnetwork anti1346/centos8-sshd:latest bash
+docker run -d --privileged --cap-add=SYS_ADMIN --name auth-server -h auth-server --net vnetwork anti1346/centos8-sshd:latest /sbin/init
 ```
 ```
 docker exec -it auth-server bash
 ```
 ```
-docker run -d --privileged --cap-add=SYS_ADMIN --name ssh-server -h ssh-server --net vnetwork anti1346/centos8-sshd:latest bash
+docker run -d --privileged --cap-add=SYS_ADMIN --name ssh-server -h ssh-server --net vnetwork anti1346/centos8-sshd:latest /sbin/init
 ```
 ```
 docker exec -it ssh-server bash
 ```
 ```
-docker run -d --privileged --cap-add=SYS_ADMIN --name ssh-client -h ssh-client --net vnetwork anti1346/centos8-sshd:latest bash
+docker run -d --privileged --cap-add=SYS_ADMIN --name ssh-client -h ssh-client --net vnetwork anti1346/centos8-sshd:latest /sbin/init
 ```
 ```
 docker exec -it ssh-client bash
