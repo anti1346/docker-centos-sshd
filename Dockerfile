@@ -2,10 +2,11 @@ FROM centos:8
 
 LABEL website="sangchul.kr"
 
+ARG OS_USER1
+ARG OS_USER1_PASSWD
 ENV OS_ROOT_PASSWD="root"
-
-ENV OS_USER1="centos"
-ENV OS_USER1_PASSWD="centos"
+ENV OS_USER1=${OS_USER1:-centos}
+ENV OS_USER1_PASSWD=${OS_USER1_PASSWD:-centos}
 
 USER root
 
@@ -39,4 +40,4 @@ CMD ["/bin/bash"]
 
 
 ###docker build
-# docker build --no-cache -t anti1346/centos8-sshd:latest .
+# docker build --tag anti1346/centos8-sshd:latest --no-cache .

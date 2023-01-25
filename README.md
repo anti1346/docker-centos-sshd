@@ -2,7 +2,11 @@
 
 ##### docker build
 ```
-docker build --no-cache --tag anti1346/centos8-sshd:latest .
+docker build --tag anti1346/centos8-sshd:latest --no-cache .
+```
+##### docker build arg
+```
+docker build --tag anti1346/centos8-sshd:latest --build-arg OS_USER1=vagrant --build-arg OS_USER1_PASSWD=vagrant --no-cache .
 ```
 ##### docker tag
 ```
