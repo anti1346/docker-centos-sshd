@@ -14,7 +14,7 @@ RUN sed -i "s/mirrorlist=/#mirrorlist=/g" /etc/yum.repos.d/CentOS-* \
   && sed -i "s/#baseurl=http:\/\/mirror.centos.org/baseurl=http:\/\/vault.centos.org/g" /etc/yum.repos.d/CentOS-* \
   && yum install -y systemd sudo passwd shadow-utils \
     openssh-server openssh-clients \
-    wget git\
+    # wget git\
     net-tools iputils vim \
   && yum clean all \
   && rm -rf /var/cache/dnf
